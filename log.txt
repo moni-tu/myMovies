@@ -1,0 +1,12 @@
+It’s always good practice to have a log of recent requests made to your server. 
+This can be helpful in so many ways, for instance, it can be used to debug your code, 
+track the most visited URLs, and more. Go ahead and create an empty text file (e.g., “log.txt”) 
+in your project folder. You’ll be populating this file dynamically through the code.
+
+fs.appendFile('log.txt', 'URL: ' + addr + '\nTimestamp: ' + new Date() + '\n\n', (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Added to log.');
+    }
+  });
