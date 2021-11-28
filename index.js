@@ -1,18 +1,29 @@
+// require modules to create the server
 const express = require('express');
-    morgan = require('morgan');
+const morgan = require('morgan');
 
 const app = express();
 
-app.use(morgan('common'));
+// create middle functions to...
+app.use(morgan('common')); //log all requests on terminal
+app.use(express.static('public')); // serve all static file in public folder 
 
+// Get index request/route
 app.get('/', (req, res) => {
-  res.send('Welcome to my app!');
+  res.send('Welcome to myMovies!');
 });
 
-app.get('/secreturl', (req, res) => {
-  res.send('This is a secret url with super top-secret content.');
+// Get documentation request/route
+app.get('/documentation', (req, res) => {
+  res.send('public/documentation.html', {root: __dirname });
 });
 
-app.listen(8080, () => {
-  console.log('Your app is listening on port 8080.');
-});
+//Get movies request/route
+app.get('/movies', (req, res) =>{
+    res.json(myMovies); //return json object containing movies
+    });
+
+//Listens to requests on port.
+app.listen(8080, () =>{
+    console.log('This app is listening on port 8080.');
+  });
