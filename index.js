@@ -87,6 +87,13 @@ app.get('/movies', (req, res) =>{
     res.json(myMovies); //return json object containing movies
     });
 
+//Error handler middleware function
+app.use((err, req, res, next) => {
+console.error(err.stack); //log all caught error to terminal
+res.status(500).send('An error has been found!');
+next();
+});
+
 //Listens to requests on port.
 app.listen(8080, () =>{
     console.log('This app is listening on port 8080.');
