@@ -1,95 +1,97 @@
 <!DOCTYPE html>
 myMovies
-
+<br>
 The complete server-side of your web application will consist of a well-designed REST API and
 architected database built using JavaScript, Node.js, Express, and MongoDB. The REST API
 will be accessed via commonly used HTTP methods like GET and POST. Similar methods
 (CRUD) will be used to retrieve data from your database and store that data in a non-relational
 way.
-
+<br>
 Whenever users of myMovies are interacting with the application, the server-side of the
 application will be in use, processing their requests and performing operations against the
 data in the database. These users will be able to use the myFlix application whenever they like
 to read information about different movies or update their user information, for instance, their
 list of “Favorite Movies.”
-
+<br>
 Movie enthusiasts want to be able to access information about different movies,
 directors, and genres. The server-side of the myMovies application will ensure they have access
 to this information, that their requests can be processed, and that all necessary data can be
 stored.
+<br>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Request</th>
+                <th>URL</th>
+                <th>HTTP Method</th>
+                <th>Request body data format</th>
+                <th>Response body data format</th>
+            </tr>
+        </thead>
 
-<table>
-    <thead>
-        <tr>
-            <th>Request</th>
-            <th>URL</th>
-            <th>HTTP Method</th>
-            <th>Request body data format</th>
-            <th>Response body data format</th>
-        </tr>
-    </thead>
-
-    <tbody> 
-        <tr>
-            <td>Get a list of Movies</td>
-            <td>/movies</td>
-            <td>GET</td>
-            <td>None</td>
-            <td>A JSON object holding data about all the students</td>
-        </tr>
-        <tr>
-            <td>Get data about a single movie by name</td>
-            <td>/movies/[Name]</td>
-            <td>GET</td>
-            <td>None</td>
-            <td>A JSON object holding data about a single movie,
-                containing an ID, name, genres, director and year of release. Example:
-                {
-                id : 1,
-                title : 'New Girl',
-                genres : 'Sitcom',
-                director: 'Elizabeth Meriwether',
-                releasedYear: 2011,
-                }
+        <tbody> 
+            <tr>
+                <td>Get a list of Movies</td>
+                <td>/movies</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object holding data about all the students</td>
+            </tr>
+            <tr>
+                <td>Get data about a single movie by name</td>
+                <td>/movies/[Name]</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object holding data about a single movie,
+                    containing an ID, name, genres, director and year of release. Example:
+                    {
+                    id : 1,
+                    title : 'New Girl',
+                    genres : 'Sitcom',
+                    director: 'Elizabeth Meriwether',
+                    releasedYear: 2011,
+                    }
+                    </td>
+            </tr>
+            <tr>
+                <td>Add a Movie</td>
+                <td>/movies</td>
+                <td>POST</td>
+                <td>A JSON object holding data about the student to add, structured like:
+                    {
+                    title : 'The Matrix',
+                    genres : {'Action', 'Science Fiction'}
+                    director: 'The Wachowskis',
+                    releasedYear: 1999
+                    }
                 </td>
-        </tr>
-        <tr>
-            <td>Add a Movie</td>
-            <td>/movies</td>
-            <td>POST</td>
-            <td>A JSON object holding data about the student to add, structured like:
-                {
-                title : 'The Matrix',
-                genres : {'Action', 'Science Fiction'}
-                director: 'The Wachowskis',
-                releasedYear: 1999
-                }
-            </td>
-            <td>
-                A JSON object holding data about the student that was added, including an ID:
-                {
-                id: 2,
-                title : 'The Matrix',
-                genres : {'Action', 'Science Fiction'}
-                director: 'The Wachowskis',
-                releasedYear: 1999
-                }
-            </td>
-        </tr>
-        <tr>
-            <td>Remove a Movie by ID</td>
-            <td>/movies/[ID]</td>
-            <td>DELETE</td>
-            <td>None</td>
-            <td>A text message indicating whether the movie was successfully removed</td>
-        </tr>
-        <tr>
-            <td>Update a Movie's genre</td>
-            <td>/movies/[genre]</td>
-            <td>PUT</td>
-            <td>None</td>
-            <td>A text message indicating whether the movie was successfully updated</td>
-        </tr>
-    </tbody>
+                <td>
+                    A JSON object holding data about the student that was added, including an ID:
+                    {
+                    id: 2,
+                    title : 'The Matrix',
+                    genres : {'Action', 'Science Fiction'}
+                    director: 'The Wachowskis',
+                    releasedYear: 1999
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>Remove a Movie by ID</td>
+                <td>/movies/[ID]</td>
+                <td>DELETE</td>
+                <td>None</td>
+                <td>A text message indicating whether the movie was successfully removed</td>
+            </tr>
+            <tr>
+                <td>Update a Movie's genre</td>
+                <td>/movies/[genre]</td>
+                <td>PUT</td>
+                <td>None</td>
+                <td>A text message indicating whether the movie was successfully updated</td>
+            </tr>
+        </tbody>
 
-</table>
+    </table>
+</div>
