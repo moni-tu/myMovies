@@ -26,8 +26,8 @@ let myMovies = [
     },
     {
       title: 'New Girl',
-      director: ['Elizabeth Meriwether'],
-      genre:['Sitcom'],
+      director: 'Elizabeth Meriwether',
+      genre:'Sitcom',
       releasedYear: 2011
     },
     {
@@ -38,7 +38,7 @@ let myMovies = [
     },
     {
       title: 'The Matrix',
-      director: ['The Wachowskis'],
+      director: 'The Wachowskis',
       genre: ['Action', 'Science Fiction'],
       releasedYear: 1999
     },
