@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 
 //Created JSON object to carry movie data.
-let myMovies = [
+let movies = [
     {
       title: 'Inception',
       director: ['Christopher Nolan'],
@@ -70,19 +70,19 @@ let myMovies = [
     }
   ];
 
-//Gets the list of data about ALL movies
+// Gets the list of data about ALL movies to the user
 app.get('/movies', (req, res) => {
-    res.json(movies);
+    res.status(200).json(movies);
 
 // Gets the data about a single movie, by name
 
 app.get('/movies/:name', (req, res) => {
-    res.json(movies.find((movie) =>
+    res.status(200).json(movies.find((movie) =>
         { return movie.name === req.params.name }));
     });
 
-// Adds data for a new movie to our list of movies.
-app.post('/students', (req, res) => {
+// Adds a new movie to our list of movies.
+app.post('/movies/:movieName', (req, res) => {
     let newMovie = req.body;
   
     if (!newMovie.name) {
@@ -90,14 +90,14 @@ app.post('/students', (req, res) => {
       res.status(400).send(message);
     } else {
       newMovie.id = uuid.v4();
-      movies.push(newStudent);
+      movies.push(newMovie);
       res.status(201).send(newMovies);
     }
   });
 
 // Deletes a movie from our list by ID
-app.delete('/movies/:id', (req, res) => {
-let movies = movies.find((student) => { return movie.id === req.params.id });
+app.delete('/movies/:deleteMovie', (req, res) => {
+let movies = movies.find((movie) => { return movie.id === req.params.id });
 
 if (movie) {
     movies = movies.filter((obj) => { return obj.id !== req.params.id });
