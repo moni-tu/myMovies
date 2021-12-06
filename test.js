@@ -6,6 +6,70 @@ const app = express();
 
 app.use(bodyParser.json());
 
+//Created JSON object to carry movie data.
+let myMovies = [
+    {
+      title: 'Inception',
+      director: ['Christopher Nolan'],
+      genre: ['Action', 'Science Fiction'],
+      releaseYear: 2010
+    },
+    {
+      title: 'Your Name',
+      director: 'Makoto Shinkai',
+      genre: ['Animated', 'Romance', 'Drama'],
+      releasedYear: 2016
+    },
+    {
+      title: 'Scrubs',
+      director: 'Bill Lawrence', 
+      genre:['Medical drama', 'Comedy-drama', 'Sitcom'],
+      releasedYear: 2001
+    },
+    {
+      title: 'New Girl',
+      director: 'Elizabeth Meriwether',
+      genre:'Sitcom',
+      releasedYear: 2011
+    },
+    {
+      title: 'Brooklyn 99', 
+      director: ['Dan Goor', 'Michael Schur'],
+      genre: ['Police procedural Sitcom'],
+      releasedYear: 2013
+    },
+    {
+      title: 'The Matrix',
+      director: 'The Wachowskis',
+      genre: ['Action', 'Science Fiction'],
+      releasedYear: 1999
+    },
+    {
+      title: 'Parasite',
+      director: 'Bong Joon-ho',
+      genre: ['Thriller', 'Black Comedy'],
+      releasedYear: 2019
+    },
+    {
+      title: 'Forrest Gump',
+      director: 'Robert Zemeckis',
+      genre: ['Comedy', 'Drama'],
+      releasedYear: 1994
+    },
+    {
+      title: 'Wedding Crashers',
+      director: 'David Dobkin',
+      genre: ['Romance', 'Comedy'],
+      releasedYear: 2005
+    },
+    {
+      title: 'BoJack Horseman',
+      director: 'Raphael Bob-Waksberg',
+      genre: ['Sitcom', 'Comedy','Drama', 'Animated'],
+      releasedYear: 2014
+    }
+  ];
+
 //Gets the list of data about ALL movies
 app.get('/movies', (req, res) => {
     res.json(movies);
@@ -42,7 +106,7 @@ if (movie) {
 });
 
 // Update the "genre" of a movie by movie name/genre name
-app.put('/movies/:name/:class/:grade', (req, res) => {
+app.put('/movies/:name/:genre', (req, res) => {
 let movie = movies.find((movie) => { return movie.name === req.params.name });
 
 if (movie) {
