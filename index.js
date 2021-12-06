@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const app = express();
 
 //Created JSON object to carry movie data.
-let myMovies = [
+let movies = [
     {
       title: 'Inception',
       director: ['Christopher Nolan'],
