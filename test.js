@@ -1,12 +1,13 @@
-const express = require('express'),
-  bodyParser = require('body-parser'),
-  uuid = require('uuid');
+const express = require('express');  
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const uuid = require('uuid');
 
 const app = express();
 
 app.use(bodyParser.json());
 
-//Created JSON object to carry movie data.
+// API
 let movies = [
     {
       title: 'Inception',
@@ -68,7 +69,7 @@ let movies = [
       genre: ['Sitcom', 'Comedy','Drama', 'Animated'],
       releasedYear: 2014
     }
-  ];
+];
 
 // Gets the list of data about ALL movies to the user
 app.get('/movies', (req, res) => {
