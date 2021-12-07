@@ -1,8 +1,17 @@
 // require modules to create the server
 const express = require('express');
-const morgan = require('morgan');
+    morgan = require('morgan'),
+    path = require('path'),
+    bodyParser = require('body-parser'),
+    uuid = require('uuid');
 
 const app = express();
+
+app.use(bodyParser.json());
+
+app.use(morgan('common'));
+
+app.use(express.static('public'));
 
 //Created JSON object to carry movie data.
 let movies = [
@@ -66,11 +75,7 @@ let movies = [
       genre: ['Sitcom', 'Comedy','Drama', 'Animated'],
       releasedYear: 2014
     }
-  ];
-
-// create middle functions to...
-app.use(morgan('common')); //log all requests on terminal
-app.use(express.static('public')); // serve all static file in public folder 
+];
 
 // Get index request/route
 app.get('/', (req, res) => {
@@ -84,17 +89,24 @@ app.get('/documentation', (req, res) => {
 
 //Get movies request/route
 app.get('/movies', (req, res) =>{
-    res.json(movies); //return json object containing movies
-    });
+  res.json(movies); //return json object containing movies
+});
+
+// Gets the data about a movie , by name
+app.get('/movies/:title', (req, res) => {
+  res.json(movies.find((movie) =>
+    { return movie.title === req.params.title
+  }));
+});
 
 //Error handler middleware function
 app.use((err, req, res, next) => {
-console.error(err.stack); //log all caught error to terminal
-res.status(500).send('An error has been found!');
-next();
+  console.error(err.stack); //log all caught error to terminal
+  res.status(500).send('An error has been found!');
+  next();
 });
 
 //Listens to requests on port.
-app.listen(8080, () =>{
-    console.log('This app is listening on port 8080.');
-  });
+app.listen(8080, () => {
+  console.log('This app is listening on port 8080.');
+});
