@@ -13,7 +13,7 @@ let movies = [
       title: 'Inception',
       director: ['Christopher Nolan'],
       genre: ['Action', 'Science Fiction'],
-      releaseYear: 2010
+      releasedYear: 2010
     },
     {
       title: 'Your Name',
@@ -77,17 +77,17 @@ app.get('/movies', (req, res) => {
 
 // Gets the data about a single movie, by name
 
-app.get('/movies/:name', (req, res) => {
+app.get('/movies/:title', (req, res) => {
     res.status(200).json(movies.find((movie) =>
-        { return movie.name === req.params.name }));
+        { return movie.title === req.params.title}));
     });
 
 // Adds a new movie to our list of movies.
-app.post('/movies/:movieName', (req, res) => {
+app.post('/movies/:title', (req, res) => {
     let newMovie = req.body;
   
-    if (!newMovie.name) {
-      const message = 'Missing name in request body';
+    if (!newMovie.title) {
+      const message = 'Missing title in request body';
       res.status(400).send(message);
     } else {
       newMovie.id = uuid.v4();
