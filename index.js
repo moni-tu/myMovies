@@ -84,7 +84,7 @@ app.get('/documentation', (req, res) => {
 
 //Get movies request/route
 app.get('/movies', (req, res) =>{
-    res.json(myMovies); //return json object containing movies
+    res.json(movies); //return json object containing movies
     });
 
 //Error handler middleware function
