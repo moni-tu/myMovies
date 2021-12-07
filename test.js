@@ -75,7 +75,7 @@ let movies = [
 app.get('/movies', (req, res) => {
     res.status(200).json(movies);
 
-// Gets the data about a single movie, by name
+// Gets the data about a single movie, by titles
 
 app.get('/movies/:title', (req, res) => {
     res.status(200).json(movies.find((movie) =>
@@ -92,13 +92,13 @@ app.post('/movies/:title', (req, res) => {
     } else {
       newMovie.id = uuid.v4();
       movies.push(newMovie);
-      res.status(201).send(newMovies);
+      res.status(201).send(newMovie);
     }
   });
 
-// Deletes a movie from our list by ID
+// Deletes a movie from our list by title
 app.delete('/movies/:deleteMovie', (req, res) => {
-let movies = movies.find((movie) => { return movie.id === req.params.id });
+let movies = movies.find((movie) => { return movie.title === req.params.title });
 
 if (movie) {
     movies = movies.filter((obj) => { return obj.id !== req.params.id });
