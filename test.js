@@ -100,21 +100,21 @@ app.post('/movies/:title', (req, res) => {
 app.delete('/movies/:deleteMovie', (req, res) => {
 let movies = movies.find((movie) => { return movie.title === req.params.title });
 
-if (movie) {
-    movies = movies.filter((obj) => { return obj.id !== req.params.id });
-    res.status(201).send('movie ' + req.params.id + ' was deleted.');
+if (movies) {
+    movies = movies.filter((obj) => { return obj.title !== req.params.title });
+    res.status(201).send('movie ' + req.params.title + ' was deleted.');
 }
 });
 
-// Update the "genre" of a movie by movie name/genre name
-app.put('/movies/:name/:genre', (req, res) => {
-let movie = movies.find((movie) => { return movie.name === req.params.name });
+// Update the genre of a movie by movie title
+app.put('/movies/:title/:genre', (req, res) => {
+let movie = movies.find((movie) => { return movie.title === req.params.title });
 
 if (movie) {
-    movie.classes[req.params.class] = parseInt(req.params.genre);
-    res.status(201).send('Movie ' + req.params.name + ' was assigned a genre of ' + req.params.genre + ' in ' + req.params.class);
+    movie.title[req.params.title] = parseInt(req.params.genre);
+    res.status(201).send('Movie ' + req.params.title + ' was assigned a genre of ' + req.params.genre + ' in ' + req.params.title);
 } else {
-    res.status(404).send('Movie with the name ' + req.params.name + ' was not found.');
+    res.status(404).send('Movie with the name ' + req.params.title + ' was not found.');
 }
 })});
 
