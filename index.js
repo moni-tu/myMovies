@@ -79,7 +79,7 @@ app.get('/', (req, res) => {
 
 // Get documentation request/route
 app.get('/documentation', (req, res) => {
-  res.sendFile('public/documentation.html', {root: __dirname });
+  res.sendFile('public/documentation.html', {root: __dirtitle});
 });
 
 //Get movies request/route
