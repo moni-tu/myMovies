@@ -111,7 +111,7 @@ app.get('/movies/:title', (req, res) => {
   });
 
 // Adds data for a new movie to our list of movies.
-app.post('/movies', (req, res) => {
+app.post('/movies/:newMovie', (req, res) => {
   let newMovie = req.body;
 
   if (!newMovie.title) {
