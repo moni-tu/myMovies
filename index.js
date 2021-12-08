@@ -110,25 +110,25 @@ app.get('/movies/:title', (req, res) => {
       { return movie.title === req.params.title}));
   });
 
-// Adds a new movie to our list of movies.
-app.post('/movies/:title', (req, res) => {
+// Adds data for a new movie to our list of movies.
+app.post('/movies', (req, res) => {
   let newMovie = req.body;
 
   if (!newMovie.title) {
     const message = 'Missing title in request body';
     res.status(400).send(message);
   } else {
-    newMovie.id = uuid.v4();
+    newMovie.title = uuid.v4();
     movies.push(newMovie);
     res.status(201).send(newMovie);
   }
 });
 
 // Deletes a movie from our list by title
-app.delete('/movies/:deleteMovie', (req, res) => {
-let movies = movies.find((movie) => { return movie.title === req.params.title });
+app.delete('/movies/:title', (req, res) => {
+let movie = movies.find((movie) => { return movie.title === req.params.title });
 
-if (movies) {
+if (movie) {
   movies = movies.filter((obj) => { return obj.title !== req.params.title });
   res.status(201).send('movie ' + req.params.title + ' was deleted.');
 }
