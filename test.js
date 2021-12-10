@@ -152,24 +152,18 @@ app.get('/movies/:title', (req, res) => {
     { return movie.title === req.params.title}));
 });
 // 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
-app.get('/genres/:genre', (req, res) => {
+app.get('/movies/genre/:name', (req, res) => {
   res.status(200).json(movies.find((genre) => {
       return genre.genre === req.params.genre
   }));
 });
 
 // 4.Return data about a director (bio, birth year, death year) by name
-app.get('/directors/:directorName', (req, res) => {
+app.get('movies/director/:name', (req, res) => {
   res.status(200).json(movies.find((director) => {
       return director.director.name === req.params.directorName
   })) 
 })
-
-//app.get('/movies/:director', (req, res) => {
-  //res.json(movies.find((movie) => {
-    //return movie.director.name === req.params.name;
-  //}));
-//}); 
 
 // 5.Allow new users to register
 app.post('/users/:newUser', (req, res) => {

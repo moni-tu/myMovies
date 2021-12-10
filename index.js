@@ -6,11 +6,8 @@ const express = require('express');
     uuid = require('uuid');
 
 const app = express();
-
 app.use(bodyParser.json());
-
 app.use(morgan('common'));
-
 app.use(express.static('public'));
 
 // Movie API
@@ -180,7 +177,7 @@ res.status(200).json(movies.find((movie) =>
 });
 
 // 3.Return data about genre by name/title
-app.get('/genres/:genre', (req, res) => {
+app.get('/movies/genre/:name', (req, res) => {
   res.status(200).json(movies.find((genre) => {
       return genre.genre === req.params.genre
   }));
@@ -188,7 +185,7 @@ app.get('/genres/:genre', (req, res) => {
 
 
 // 4.Return data about a director (bio, birth year, death year) by name
-app.get('/directors/:directorName', (req, res) => {
+app.get('movies/director/:name', (req, res) => {
   res.status(200).json(movies.find((director) => {
       return director.director.name === req.params.directorName
   })) 
