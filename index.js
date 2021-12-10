@@ -111,16 +111,23 @@ app.listen(8080, () =>{
   console.log('This app is listening on port 8080.');
 });
 
-// Gets the list of data about ALL movies to the user
+// 1. Gets the list of data about ALL movies to the user
 app.get('/movies', (req, res) => {
 res.status(200).json(movies);
 
-// Gets the data about a single movie, by titles
+// 2. Gets the data about a single movie, by titles
 
 app.get('/movies/:title', (req, res) => {
 res.status(200).json(movies.find((movie) =>
     { return movie.title === req.params.title}));
 });
+
+// 4.Return data about a director (bio, birth year, death year) by name
+app.get('/directors/:directorName', (req, res) => {
+  res.status(200).json(movies.find((director) => {
+      return director.director.name === req.params.directorName
+  })) 
+})
 
 // Adds data for a new movie to our list of movies.
 app.post('/movies/:newMovie', (req, res) => {
