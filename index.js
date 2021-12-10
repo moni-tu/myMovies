@@ -122,12 +122,28 @@ res.status(200).json(movies.find((movie) =>
     { return movie.title === req.params.title}));
 });
 
+// 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
+app.get('/movies/:genre', (req, res) => {
+  res.json(movies.find((movie) => {
+    return movie.genre === req.params.genre;
+  }));
+});
+
 // 4.Return data about a director (bio, birth year, death year) by name
-app.get('/directors/:directorName', (req, res) => {
+app.get('/movies/:director', (req, res) => {
   res.status(200).json(movies.find((director) => {
-      return director.director.name === req.params.directorName
+      return movies.director.name === req.params.name
   })) 
 })
+// 5.Allow new user
+app.post('/users/:newUser', (req, res) => {
+  res.send('Seccessful registration')
+});
+
+// 6.Allow users to update their user information
+app.put('/users/:Username', (req, res) => {
+  res.send('Seccessful update')
+});
 
 // Adds data for a new movie to our list of movies.
 app.post('/movies/:newMovie', (req, res) => {
