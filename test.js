@@ -71,53 +71,58 @@ let movies = [
     }
 ];
 
-// Gets the list of data about ALL movies to the user
+let users = []
+
+// 1.Return a list of ALL movies to the user
 app.get('/movies', (req, res) => {
   res.status(200).json(movies);
-
-// Gets the data about a single movie, by titles
-
+});
+// 2.Return data about a single movie by title to the user
 app.get('/movies/:title', (req, res) => {
   res.status(200).json(movies.find((movie) =>
-      { return movie.title === req.params.title}));
-  });
 
-// Adds data for a new movie to our list of movies.
-app.post('/movies/:newMovie', (req, res) => {
-  let newMovie = req.body;
+    { return movie.title === req.params.title}));
+});
+// 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
 
-  if (!newMovie.title) {
-    const message = 'Missing title in request body';
+app.get('/movies/director/:name', (req, res) => {
+  res.json(movies.find((movie) => {
+    return movie.director.name === req.params.name;
+  }));
+});
+
+// 5.Allow new users to register
+app.post('/users', (req, res) => {
+  let newUser = req.body;
+  if (!newUser.name) {
+    const message = 'Missing name in request body';
     res.status(400).send(message);
   } else {
-    newMovie.title = uuid.v4();
-    movies.push(newMovie);
-    res.status(201).send(newMovie);
+    newUser.id = uuid.v4();
+    users.push(newUser);
+    res.status(201).send(newUser);
   }
 });
 
-// Deletes a movie from our list by title
-app.delete('/movies/:title', (req, res) => {
-let movie = movies.find((movie) => { return movie.title === req.params.title });
+// 6.Allow users to update their user info (username)
+app.put('/users/:username', (req, res) => {
+  res.send('No such User');
+      { return movie.title === req.params.title}
+  });
 
-if (movie) {
-  movies = movies.filter((obj) => { return obj.title !== req.params.title });
-  res.status(201).send('movie ' + req.params.title + ' was deleted.');
-}
+// 7.Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
+app.post('/users/favorite-list', (req, res) => {
+  res.send('Movie has been added.');
+});
+// 8.Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
+app.delete('/users/favorite-list', (req, res) => {
+  res.send('Movie has been removed.');
+});
+// 9.Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
+app.delete('/users/:username', (req, res) => {
+  res.send('User email has been removed.');
 });
 
-// Update the genre of a movie by movie title
-app.put('/movies/:title/:genre', (req, res) => {
-let movie = movies.find((movie) => { return movie.title === req.params.title });
-
-if (movie) {
-  movie.title[req.params.title] = parseInt(req.params.genre);
-  res.status(201).send('Movie ' + req.params.title + ' was assigned a genre of ' + req.params.genre + ' in ' + req.params.title);
-} else {
-  res.status(404).send('Movie with the name ' + req.params.title + ' was not found.');
-}
-})});
-
 app.listen(8080, () => {
-    console.log('Your app is listening on port 8080');
-  });
+  console.log('Your app is listening on port 8080');
+});
