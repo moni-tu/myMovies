@@ -134,7 +134,12 @@ let movies = [
   }
 ];
 
-let users = []
+let users = [
+  {
+    username: 'moni-tu',
+    favourites: ['New Girl', 'Your Name'],
+  },
+];
 
 // 1.Return a list of ALL movies to the user
 app.get('/movies', (req, res) => {
@@ -161,7 +166,7 @@ app.get('/movies/director/:name', (req, res) => {
 });
 
 // 5.Allow new users to register
-app.post('/users', (req, res) => {
+app.post('/users/:newUser', (req, res) => {
   let newUser = req.body;
   if (!newUser.name) {
     const message = 'Missing name in request body';
@@ -180,12 +185,12 @@ app.put('/users/:username', (req, res) => {
   });
 
 // 7.Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
-app.post('/users/favorite-list', (req, res) => {
+app.post('/users/favorites', (req, res) => {
   res.send('Movie has been added.');
 });
 
 // 8.Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-app.delete('/users/favorite-list', (req, res) => {
+app.delete('/users/favorites', (req, res) => {
   res.send('Movie has been removed.');
 });
 // 9.Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
