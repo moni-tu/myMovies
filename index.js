@@ -158,7 +158,7 @@ app.post('users/:favourites/:movieName', (req, res) => {
 })  
 
 // 8.Delete movie from list of favorite 
-app.delete('users/:favourites/:deleteMovie', (req, res) => {
+app.delete('users/:favourites/:movieName', (req, res) => {
     res.send('Seccessfully deleted movie')
 });
 
