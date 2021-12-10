@@ -191,7 +191,7 @@ app.put('/users/:username', (req, res) => {
   });
 
 // 7.Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
-app.post('/users/:favourites', (req, res) => {
+app.post('/users/:favourites/movieName', (req, res) => {
   res.send('Movie has been added.');
 });
 
