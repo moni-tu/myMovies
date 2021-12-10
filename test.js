@@ -50,6 +50,7 @@ let movies = [
   },
 ];
 
+
 let users = []
 
 // 1.Return a list of ALL movies to the user
@@ -59,6 +60,7 @@ app.get('/movies', (req, res) => {
 // 2.Return data about a single movie by title to the user
 app.get('/movies/:title', (req, res) => {
   res.status(200).json(movies.find((movie) =>
+
     { return movie.title === req.params.title}));
 });
 // 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
@@ -91,7 +93,8 @@ app.post('/users', (req, res) => {
 // 6.Allow users to update their user info (username)
 app.put('/users/:username', (req, res) => {
   res.send('No such User');
-});
+      { return movie.title === req.params.title}));
+  });
 
 // 7.Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
 app.post('/users/favorite-list', (req, res) => {
@@ -106,6 +109,7 @@ app.delete('/users/favorite-list', (req, res) => {
 app.delete('/users/:username', (req, res) => {
   res.send('User email has been removed.');
 });
+
 
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080');
