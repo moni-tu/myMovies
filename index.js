@@ -148,7 +148,7 @@ app.post('/users/:newUser', (req, res) => {
 });
 
 // 6.Allow users to update their user information
-app.put('/users/:Username', (req, res) => {
+app.put('/users/:username', (req, res) => {
   res.send('Seccessful update')
 });
 

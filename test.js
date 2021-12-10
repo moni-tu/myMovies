@@ -169,7 +169,7 @@ app.get('/movies/:director', (req, res) => {
   //res.json(movies.find((movie) => {
     //return movie.director.name === req.params.name;
   //}));
-//});
+//}); 
 
 // 5.Allow new users to register
 app.post('/users/:newUser', (req, res) => {
