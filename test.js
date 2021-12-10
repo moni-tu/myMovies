@@ -1,74 +1,53 @@
+/*
+Hello Monica, you are expected to create this endpoints.
+1.Return a list of ALL movies to the user
+2.Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
+3.Return data about a genre (description) by name/title (e.g., “Thriller”)
+4.Return data about a director (bio, birth year, death year) by name
+5.Allow new users to register
+6.Allow users to update their user info (username)
+7.Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
+8.Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
+9.Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
+*/
 const express = require('express');  
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const uuid = require('uuid');
 
 const app = express();
-
+app.use(morgan('common'));
+app.use(express.static('public'));
 app.use(bodyParser.json());
 
 // API
 let movies = [
-    {
-      title: 'Inception',
-      director: ['Christopher Nolan'],
-      genre: ['Action', 'Science Fiction'],
-      releasedYear: 2010
+  {
+    title: 'The Matrix',
+    year: '1999',
+    genre: {
+      name: 'Action,Sci-Fi',
+      description: 'When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.'      
     },
-    {
-      title: 'Your Name',
-      director: 'Makoto Shinkai',
-      genre: ['Animated', 'Romance', 'Drama'],
-      releasedYear: 2016
+    director: {
+        name: 'Lana Wachowski,Lilly Wachowski',
+        bio: ' The American sisters are  film and television directors, writers and producers',
+        born: 'June 21, 1965,December 29, 1967'
+      },
+  },
+  {
+    title: 'Inception',
+    year: '1999',
+    genre: {
+      name: 'Action,Sci-Fi',
+      description: 'When a'      
     },
-    {
-      title: 'Scrubs',
-      director: 'Bill Lawrence', 
-      genre:['Medical drama', 'Comedy-drama', 'Sitcom'],
-      releasedYear: 2001
-    },
-    {
-      title: 'New Girl',
-      director: 'Elizabeth Meriwether',
-      genre:'Sitcom',
-      releasedYear: 2011
-    },
-    {
-      title: 'Brooklyn 99', 
-      director: ['Dan Goor', 'Michael Schur'],
-      genre: ['Police procedural Sitcom'],
-      releasedYear: 2013
-    },
-    {
-      title: 'The Matrix',
-      director: 'The Wachowskis',
-      genre: ['Action', 'Science Fiction'],
-      releasedYear: 1999
-    },
-    {
-      title: 'Parasite',
-      director: 'Bong Joon-ho',
-      genre: ['Thriller', 'Black Comedy'],
-      releasedYear: 2019
-    },
-    {
-      title: 'Forrest Gump',
-      director: 'Robert Zemeckis',
-      genre: ['Comedy', 'Drama'],
-      releasedYear: 1994
-    },
-    {
-      title: 'Wedding Crashers',
-      director: 'David Dobkin',
-      genre: ['Romance', 'Comedy'],
-      releasedYear: 2005
-    },
-    {
-      title: 'BoJack Horseman',
-      director: 'Raphael Bob-Waksberg',
-      genre: ['Sitcom', 'Comedy','Drama', 'Animated'],
-      releasedYear: 2014
-    }
+    director: {
+        name: 'Christopher Nolan',
+        bio: ' The American film and television directors, writers and producers',
+        born: ''
+      },
+  },
 ];
 
 let users = []
@@ -84,7 +63,6 @@ app.get('/movies/:title', (req, res) => {
     { return movie.title === req.params.title}));
 });
 // 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
-
 app.get('/movies/director/:name', (req, res) => {
   res.json(movies.find((movie) => {
     return movie.director.name === req.params.name;
@@ -114,6 +92,7 @@ app.put('/users/:username', (req, res) => {
 app.post('/users/favorite-list', (req, res) => {
   res.send('Movie has been added.');
 });
+
 // 8.Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
 app.delete('/users/favorite-list', (req, res) => {
   res.send('Movie has been removed.');
