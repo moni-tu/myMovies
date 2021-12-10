@@ -153,12 +153,12 @@ app.put('/users/:username', (req, res) => {
 });
 
 // 7.Add new movie to list of favorite
-app.post('/favorites/:movieName', (req, res) => {
+app.post('users/:favourites/:movieName', (req, res) => {
     res.send('Seccessfully added new movie to list of favorite')
 })  
 
 // 8.Delete movie from list of favorite 
-app.delete('/favorites/:deleteMovie', (req, res) => {
+app.delete('users/:favourites/:deleteMovie', (req, res) => {
     res.send('Seccessfully deleted movie')
 });
 

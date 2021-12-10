@@ -191,12 +191,12 @@ app.put('/users/:username', (req, res) => {
   });
 
 // 7.Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
-app.post('/users/:favorites', (req, res) => {
+app.post('/users/:favourites', (req, res) => {
   res.send('Movie has been added.');
 });
 
 // 8.Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-app.delete('/users/:favorites', (req, res) => {
+app.delete('/users/:favourites', (req, res) => {
   res.send('Movie has been removed.');
 });
 // 9.Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
