@@ -74,7 +74,7 @@ let movies = [
       Birth: 1975,
       Death: 'still alive',
     },
-    genre: ['Police procedural Sitcom'],
+    genre: 'Police procedural Sitcom',
     releasedYear: 2013
   },
   {
@@ -85,7 +85,7 @@ let movies = [
       Birth: 1965/1967,
       Death: 'still alive',
     },
-    genre: ['Science Fiction'],
+    genre: 'Science Fiction',
     releasedYear: 1999 
   },
   {
@@ -96,7 +96,7 @@ let movies = [
       Birth: 1969,
       Death: 'still alive',
     },
-    genre: ['Thriller'],
+    genre: 'Thriller',
     releasedYear: 2019
   },
   {
@@ -107,7 +107,7 @@ let movies = [
       Birth: 1951,
       Death: 'still alive',
     },
-    genre: ['Drama'],
+    genre: 'Drama',
     releasedYear: 1994
   },
   {
@@ -118,7 +118,7 @@ let movies = [
       Birth: 1970,
       Death: 'still alive',
     },
-    genre: ['Comedy'],
+    genre: 'Comedy',
     releasedYear: 2005
   },
   {
@@ -129,7 +129,7 @@ let movies = [
       Birth: 1984,
       Death: 'still alive',
     },
-    genre: ['Drama'],
+    genre: 'Drama',
     releasedYear: 2014
   }
 ];

@@ -13,68 +13,118 @@ app.use(morgan('common'));
 
 app.use(express.static('public'));
 
-//Created JSON object to carry movie data.
+// Movie API
 let movies = [
-    {
-      title: 'Inception',
-      director: ['Christopher Nolan'],
-      genre: ['Action', 'Science Fiction'],
-      releaseYear: 2010
+  {
+    title: 'Inception',
+    director: {
+      Name:'Christopher Nolan',
+      Bio: 'British-American film director, producer, and screenwriter. His films have grossed more than US$5 billion worldwide, and have garnered 11 Academy Awards from 36 nominations.',
+      Birth: 1970,
+      Death: 'still alive',
     },
-    {
-      title: 'Your Name',
-      director: 'Makoto Shinkai',
-      genre: ['Animated', 'Romance', 'Drama'],
-      releasedYear: 2016
+    genre: 'Science Fiction',
+    releaseYear: 2010
+  },
+  {
+    title: 'Your Name',
+    director:  {
+      Name:'Makoto Shinkai',
+      Bio: 'Makoto Shinkai is a Japanese animator, filmmaker, author, and manga artist.',
+      Birth: 1973,
+      Death: 'still alive',
     },
-    {
-      title: 'Scrubs',
-      director: 'Bill Lawrence', 
-      genre:['Medical drama', 'Comedy-drama', 'Sitcom'],
-      releasedYear: 2001
+    genre: 'Romance',
+    releasedYear: 2016
+  },
+  {
+    title: 'Scrubs',
+    director:  {
+      Name:'Bill Lawrence',
+      Bio: 'American screenwriter, producer, and director. He is the creator of the series Scrubs and co-creator of shows including Cougar Town, Spin City, Ground Floor',
+      Birth: 1968,
+      Death: 'still alive',
+    }, 
+    genre: 'Comedy-drama',
+    releasedYear: 2001
+  },
+  {
+    title: 'New Girl',
+    director: {
+      Name:'Elizabeth Meriwether',
+      Bio: 'American writer, producer and television showrunner. She is known for creating the Fox sitcom New Girl, and for writing the play Oliver Parker! (2010) and the romantic comedy film No Strings Attached (2011).',
+      Birth: 1981,
+      Death: 'still alive',
     },
-    {
-      title: 'New Girl',
-      director: 'Elizabeth Meriwether',
-      genre:'Sitcom',
-      releasedYear: 2011
+    genre:'Sitcom',
+    releasedYear: 2011
+  },
+  {
+    title: 'Brooklyn 99', 
+    director:  {
+      Name:'Dan Goor',
+      Bio: 'American comedy writer and television producer. He has written for several comedy talk shows including The Daily Show, Last Call with Carson Daly and Late Night with Conan O"Brien',
+      Birth: 1975,
+      Death: 'still alive',
     },
-    {
-      title: 'Brooklyn 99', 
-      director: ['Dan Goor', 'Michael Schur'],
-      genre: ['Police procedural Sitcom'],
-      releasedYear: 2013
+    genre: 'Police procedural Sitcom',
+    releasedYear: 2013
+  },
+  {
+    title: 'The Matrix',
+    director:  {
+      Name:'The Wachowskis',
+      Bio: 'American film and television directors, writers and producers.The sisters are both trans women.',
+      Birth: 1965/1967,
+      Death: 'still alive',
     },
-    {
-      title: 'The Matrix',
-      director: 'The Wachowskis',
-      genre: ['Action', 'Science Fiction'],
-      releasedYear: 1999 
+    genre: 'Science Fiction',
+    releasedYear: 1999 
+  },
+  {
+    title: 'Parasite',
+    director:  {
+      Name:'Bong Joon-ho',
+      Bio: 'South Korean film director, producer and screenwriter. The recipient of three Academy Awards, his filmography is characterised by emphasis on social themes, genre-mixing, black humor, and sudden tone shifts.',
+      Birth: 1969,
+      Death: 'still alive',
     },
-    {
-      title: 'Parasite',
-      director: 'Bong Joon-ho',
-      genre: ['Thriller', 'Black Comedy'],
-      releasedYear: 2019
+    genre: 'Thriller',
+    releasedYear: 2019
+  },
+  {
+    title: 'Forrest Gump',
+    director:  {
+      Name:'Robert Zemeckis',
+      Bio: 'American film director, producer, and screenwriter. He first came to public attention as the director of the action-adventure romantic comedy Romancing the Stone (1984), the science-fiction comedy Back to the Future film trilogy (1985—90), and the live-action/animated comedy Who Framed Roger Rabbit (1988).',
+      Birth: 1951,
+      Death: 'still alive',
     },
-    {
-      title: 'Forrest Gump',
-      director: 'Robert Zemeckis',
-      genre: ['Comedy', 'Drama'],
-      releasedYear: 1994
+    genre: 'Drama',
+    releasedYear: 1994
+  },
+  {
+    title: 'Wedding Crashers',
+    director:  {
+      Name:'David Dobkin',
+      Bio: ' American director, producer and screenwriter. He is best known for directing the films Clay Pigeons, Shanghai Knights, Wedding Crashers, The Judge, and Eurovision Song Contest: The Story of Fire Saga.',
+      Birth: 1970,
+      Death: 'still alive',
     },
-    {
-      title: 'Wedding Crashers',
-      director: 'David Dobkin',
-      genre: ['Romance', 'Comedy'],
-      releasedYear: 2005
+    genre: 'Comedy',
+    releasedYear: 2005
+  },
+  {
+    title: 'BoJack Horseman',
+    director: {
+      Name:'Raphael Bob-Waksberg',
+      Bio: 'American comedian, writer, producer, actor, and voice actor. He is known as the creator and showrunner of the Netflix animated comedy series BoJack Horseman and the Amazon Prime Video animated series Undone. ',
+      Birth: 1984,
+      Death: 'still alive',
     },
-    {
-      title: 'BoJack Horseman',
-      director: 'Raphael Bob-Waksberg',
-      genre: ['Sitcom', 'Comedy','Drama', 'Animated'],
-      releasedYear: 2014
-    }
+    genre: 'Drama',
+    releasedYear: 2014
+  }
 ];
 
 let users = [
