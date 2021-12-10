@@ -77,6 +77,13 @@ let movies = [
     }
 ];
 
+let users = [
+  {
+    username: 'moni-tu',
+    favourites: ['New Girl', 'Your Name'],
+  },
+];
+
 // Get index request/route
 app.get('/', (req, res) => {
   res.send('Welcome to myMovies!');
@@ -144,6 +151,21 @@ app.post('/users/:newUser', (req, res) => {
 app.put('/users/:Username', (req, res) => {
   res.send('Seccessful update')
 });
+
+// 7.Add new movie to list of favorite
+app.post('/favorites/:movieName', (req, res) => {
+    res.send('Seccessfully added new movie to list of favorite')
+})  
+
+// 8.Delete movie from list of favorite 
+app.delete('/favorites/:deleteMovie', (req, res) => {
+    res.send('Seccessfully deleted movie')
+});
+
+// 9.Delete the user
+app.delete('/users/:deleteUser', (req, res) => {
+  res.send('User seccessfully deleted!')
+})
 
 // Adds data for a new movie to our list of movies.
 app.post('/movies/:newMovie', (req, res) => {
