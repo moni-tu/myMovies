@@ -152,16 +152,16 @@ app.get('/movies/:title', (req, res) => {
     { return movie.title === req.params.title}));
 });
 // 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
-app.get('/movies/:genre', (req, res) => {
-  res.json(movies.find((movie) => {
-    return movie.genre === req.params.genre;
+app.get('/genres/:genre', (req, res) => {
+  res.status(200).json(movies.find((genre) => {
+      return genre.genre === req.params.genre
   }));
 });
 
 // 4.Return data about a director (bio, birth year, death year) by name
-app.get('/movies/:director', (req, res) => {
+app.get('/directors/:directorName', (req, res) => {
   res.status(200).json(movies.find((director) => {
-      return movies.director.name === req.params.name
+      return director.director.name === req.params.directorName
   })) 
 })
 
@@ -187,7 +187,7 @@ app.post('/users/:newUser', (req, res) => {
 // 6.Allow users to update their user info (username)
 app.put('/users/:username', (req, res) => {
   res.send('No such User');
-      { return movie.title === req.params.title}
+      { return user.name === req.params.name}
   });
 
 // 7.Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
