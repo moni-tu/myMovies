@@ -23,31 +23,65 @@ app.use(bodyParser.json());
 // API
 let movies = [
   {
-    title: 'The Matrix',
-    year: '1999',
-    genre: {
-      name: 'Action,Sci-Fi',
-      description: 'When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.'      
-    },
-    director: {
-        name: 'Lana Wachowski,Lilly Wachowski',
-        bio: ' The American sisters are  film and television directors, writers and producers',
-        born: 'June 21, 1965,December 29, 1967'
-      },
+    title: 'Inception',
+    director: ['Christopher Nolan'],
+    genre: ['Action', 'Science Fiction'],
+    releaseYear: 2010
   },
   {
-    title: 'Inception',
-    year: '1999',
-    genre: {
-      name: 'Action,Sci-Fi',
-      description: 'When a'      
-    },
-    director: {
-        name: 'Christopher Nolan',
-        bio: ' The American film and television directors, writers and producers',
-        born: ''
-      },
+    title: 'Your Name',
+    director: 'Makoto Shinkai',
+    genre: ['Animated', 'Romance', 'Drama'],
+    releasedYear: 2016
   },
+  {
+    title: 'Scrubs',
+    director: 'Bill Lawrence', 
+    genre:['Medical drama', 'Comedy-drama', 'Sitcom'],
+    releasedYear: 2001
+  },
+  {
+    title: 'New Girl',
+    director: 'Elizabeth Meriwether',
+    genre:'Sitcom',
+    releasedYear: 2011
+  },
+  {
+    title: 'Brooklyn 99', 
+    director: ['Dan Goor', 'Michael Schur'],
+    genre: ['Police procedural Sitcom'],
+    releasedYear: 2013
+  },
+  {
+    title: 'The Matrix',
+    director: 'The Wachowskis',
+    genre: ['Action', 'Science Fiction'],
+    releasedYear: 1999 
+  },
+  {
+    title: 'Parasite',
+    director: 'Bong Joon-ho',
+    genre: ['Thriller', 'Black Comedy'],
+    releasedYear: 2019
+  },
+  {
+    title: 'Forrest Gump',
+    director: 'Robert Zemeckis',
+    genre: ['Comedy', 'Drama'],
+    releasedYear: 1994
+  },
+  {
+    title: 'Wedding Crashers',
+    director: 'David Dobkin',
+    genre: ['Romance', 'Comedy'],
+    releasedYear: 2005
+  },
+  {
+    title: 'BoJack Horseman',
+    director: 'Raphael Bob-Waksberg',
+    genre: ['Sitcom', 'Comedy','Drama', 'Animated'],
+    releasedYear: 2014
+  }
 ];
 
 let users = []
