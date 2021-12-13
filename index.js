@@ -1,16 +1,26 @@
-// require modules to create the server
-const express = require('express');
-    morgan = require('morgan'),
-    path = require('path'),
-    bodyParser = require('body-parser'),
-    uuid = require('uuid');
+/*
+Hello Monica, you are expected to create this endpoints.
+1.Return a list of ALL movies to the user
+2.Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
+3.Return data about a genre (description) by name/title (e.g., “Thriller”)
+4.Return data about a director (bio, birth year, death year) by name
+5.Allow new users to register
+6.Allow users to update their user info (username)
+7.Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
+8.Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
+9.Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
+*/
+const express = require('express');  
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const uuid = require('uuid');
 
 const app = express();
-app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(express.static('public'));
+app.use(bodyParser.json());
 
-// Movie API
+// API
 let movies = [
   {
     title: 'Inception',
@@ -131,124 +141,63 @@ let users = [
   },
 ];
 
-// Get index request/route
-app.get('/', (req, res) => {
-  res.send('Welcome to myMovies!');
-});
-
-// Get documentation request/route
-app.get('/documentation', (req, res) => {
-  res.sendFile('public/documentation.html', {root: __dirtitle});
-});
-
-//Get movies request/route
-app.get('/movies', (req, res) =>{
-  res.json(movies); //return json object containing movies
-});
-
-// Gets the data about a movie , by name
-app.get('/movies/:title', (req, res) => {
-  res.json(movies.find((movie) =>
-    { return movie.title === req.params.title
-  }));
-});
-
-//Error handler middleware function
-app.use((err, req, res, next) => {
-  console.error(err.stack); //log all caught error to terminal
-  res.status(500).send('An error has been found!');
-  next();
-});
-
-
-app.listen(8080, () =>{
-  console.log('This app is listening on port 8080.');
-});
-
-// 1. Gets the list of data about ALL movies to the user
+// 1.Return a list of ALL movies to the user
 app.get('/movies', (req, res) => {
-res.status(200).json(movies);
-
-// 2. Gets the data about a single movie, by titles
-
+  res.status(200).json(movies);
+});
+// 2.Return data about a single movie by title to the user
 app.get('/movies/:title', (req, res) => {
-res.status(200).json(movies.find((movie) =>
+  res.status(200).json(movies.find((movie) =>
+
     { return movie.title === req.params.title}));
 });
-
-// 3.Return data about genre by name/title
-app.get('/movies/genre/:name', (req, res) => {
-  res.status(200).json(movies.find((genre) => {
-      return genre.genre === req.params.genre
+// 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
+app.get('/movies/:genre', (req, res) => {
+  res.status(200).json(movies.find((movie) => {
+  return movie.genre === req.params.genre
   }));
 });
-
 
 // 4.Return data about a director (bio, birth year, death year) by name
 app.get('movies/director/:name', (req, res) => {
-  res.status(200).json(movies.find((director) => {
-      return director.director.name === req.params.directorName
-  })) 
+  res.status(200).json(movies.find((movie) => {
+  return movie.director.name === req.params.name
+  }))
 })
 
-// 5.Allow new user
+// 5.Allow new users to register
 app.post('/users/:newUser', (req, res) => {
-  res.send('Seccessful registration')
+  let newUser = req.body;
+  if (!newUser.name) {
+    const message = 'Missing name in request body';
+    res.status(400).send(message);
+  } else {
+    newUser.id = uuid.v4();
+    users.push(newUser);
+    res.status(201).send(newUser);
+  }
 });
 
-// 6.Allow users to update their user information
+// 6.Allow users to update their user info (username)
 app.put('/users/:username', (req, res) => {
-  res.send('Seccessful update')
+  res.send('No such User');
+      { return user.name === req.params.name}
+  });
+
+// 7.Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
+app.post('/users/:favourites/:movieName', (req, res) => {
+  res.send('Movie has been added.');
 });
 
-// 7.Add new movie to list of favorite
-app.post('users/:favourites/:movieName', (req, res) => {
-    res.send('Seccessfully added new movie to list of favorite')
-})  
-
-// 8.Delete movie from list of favorite 
-app.delete('users/:favourites/:movieName', (req, res) => {
-    res.send('Seccessfully deleted movie')
+// 8.Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
+app.delete('/users/:favourites/:movieName', (req, res) => {
+  res.send('Movie has been removed.');
+});
+// 9.Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
+app.delete('/users/:username', (req, res) => {
+  res.send('User email has been removed.');
 });
 
-// 9.Delete the user
-app.delete('/users/:deleteUser', (req, res) => {
-  res.send('User seccessfully deleted!')
-})
-
-// Adds data for a new movie to our list of movies.
-app.post('/movies/:newMovie', (req, res) => {
-let newMovie = req.body;
-
-if (!newMovie.title) {
-  const message = 'Missing title in request body';
-  res.status(400).send(message);
-} else {
-  newMovie.title = uuid.v4();
-  movies.push(newMovie);
-  res.status(201).send(newMovie);
-}
+app.listen(8080, () => {
+  console.log('Your app is listening on port 8080');
 });
-
-// Deletes a movie from our list by title
-app.delete('/movies/:title', (req, res) => {
-let movie = movies.find((movie) => { return movie.title === req.params.title });
-
-if (movie) {
-movies = movies.filter((obj) => { return obj.title !== req.params.title });
-res.status(201).send('movie ' + req.params.title + ' was deleted.');
-}
-});
-
-// Update the genre of a movie by movie title
-app.put('/movies/:title/:genre', (req, res) => {
-let movie = movies.find((movie) => { return movie.title === req.params.title });
-
-if (movie) {
-movie.title[req.params.title] = parseInt(req.params.genre);
-res.status(201).send('Movie ' + req.params.title + ' was assigned a genre of ' + req.params.genre + ' in ' + req.params.title);
-} else {
-res.status(404).send('Movie with the name ' + req.params.title + ' was not found.');
-}
-})});
-
