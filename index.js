@@ -141,6 +141,7 @@ let users = [
   },
 ];
 
+app.get ('/', )
 // 1.Return a list of ALL movies to the user
 app.get('/movies', (req, res) => {
   res.status(200).json(movies);
@@ -181,7 +182,6 @@ app.post('/users/:newUser', (req, res) => {
 // 6.Allow users to update their user info (username)
 app.put('/users/:username', (req, res) => {
   res.send('No such User');
-      { return user.name === req.params.name}
   });
 
 // 7.Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
