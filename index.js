@@ -114,7 +114,7 @@ let movies = [
     title: 'Wedding Crashers',
     director:  {
       Name:'David Dobkin',
-      Bio: ' American director, producer and screenwriter. He is best known for directing the films Clay Pigeons, Shanghai Knights, Wedding Crashers, The Judge, and Eurovision Song Contest: The Story of Fire Saga.',
+      Bio: 'American director, producer and screenwriter. He is best known for directing the films Clay Pigeons, Shanghai Knights, Wedding Crashers, The Judge, and Eurovision Song Contest: The Story of Fire Saga.',
       Birth: 1970,
       Death: 'still alive',
     },
