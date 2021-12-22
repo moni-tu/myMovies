@@ -212,11 +212,11 @@ app.post('/users', (req, res) => {
     });
 });
 
-// 6. Get all users
-app.get('/users', (req, res) => {
-  Users.find()
-    .then((users) => {
-      res.status(201).json(users);
+// 6. Get a user by username
+app.get('/users/:Username', (req, res) => {
+  Users.findOne({ Username: req.params.Username })
+    .then((user) => {
+      res.json(user);
     })
     .catch((err) => {
       console.error(err);
