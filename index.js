@@ -11,18 +11,22 @@ Hello Monica, you are expected to create this endpoints.
 9.Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
 */
 
+const express = require('express');  
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const uuid = require('uuid');
+const app = express();
+
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 
 const Movies = Models.Movie;
 const Users = Models.User;
-mongoose.connect('mongodb://localhost:27017/Test', { useNewUrlParser: true, useUnifiedTopology: true });
-const express = require('express');  
-const morgan = require('morgan');
-const bodyParser = require('body-parser');
-const uuid = require('uuid');
+const Genres = Models.Genre;
+const Directors = Models.Director;
 
-const app = express();
+mongoose.connect('mongodb://localhost:27017/Test', { useNewUrlParser: true, useUnifiedTopology: true });
+
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -173,23 +177,40 @@ app.get('/movies/director/:name', (req, res) => {
   }))
 })
 
-// 5.Allow new users to register
-app.post('/users/:newUser', (req, res) => {
-  let newUser = req.body;
-  if (!newUser.name) {
-    const message = 'Missing name in request body';
-    res.status(400).send(message);
-  } else {
-    newUser.id = uuid.v4();
-    users.push(newUser);
-    res.status(201).send(newUser);
-  }
+//6. Add a user
+/* We’ll expect JSON in this format
+{
+  ID: Integer,
+  Username: String,
+  Password: String,
+  Email: String,
+  Birthday: Date
+}*/
+app.post('/users', (req, res) => {
+  Users.findOne({ Username: req.body.Username })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.Username + 'already exists');
+      } else {
+        Users
+          .create({
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+          })
+          .then((user) =>{res.status(201).json(user) })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).send('Error: ' + error);
+        })
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
 });
-
-// 6.Allow users to update their user info (username)
-app.put('/users/:username', (req, res) => {
-  res.send('No such User');
-  });
 
 // 7.Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
 app.post('/users/:favourites/:name', (req, res) => {
