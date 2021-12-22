@@ -166,9 +166,14 @@ app.get('/movies', (req, res) => {
 });
 // 2.Return data about a single movie by title to the user
 app.get('/movies/:title', (req, res) => {
-  res.status(200).json(movies.find((movie) =>
-
-    { return movie.title === req.params.title}));
+  movies.findOne({ title: req.params.title })
+    .then((title) => {
+      res.json(title);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 // 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
 app.get('/movies/genre/:genre', (req, res) => {
