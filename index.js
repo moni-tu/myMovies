@@ -49,8 +49,8 @@ app.get('/movies', (req, res) => {
 // 2.Return data about a single movie by title to the user
 app.get('/movies/:title', (req, res) => {
   Movies.findOne({ title: req.params.title })
-    .then((title) => {
-      res.json(title);
+    .then((movie) => {
+      res.json(movie);
     })
     .catch((err) => {
       console.error(err);
@@ -58,18 +58,28 @@ app.get('/movies/:title', (req, res) => {
     });
 });
 // 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
-app.get('/movies/genre/:genre', (req, res) => {
-  const foundGenre = movies.find((movie) => movie.genre === req.params.genre)
-  res.status(200).json(foundGenre)
-  
+app.get('/genre/:name', (req, res) => {
+  Genres.findOne({ name: req.params.name })
+    .then((genre) => {
+      res.json(genre);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 // 4.Return data about a director (bio, birth year, death year) by name
-app.get('/movies/director/:name', (req, res) => {
-  res.status(200).json(movies.find((movie) => {
-    return movie.director.Name === req.params.name
-  }))
-})
+app.get('/director/:name', (req, res) => {
+  Directors.findOne({ name: req.params.name })
+    .then((director) => {
+      res.json(director);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
 
 //5. Add a user
 /* We’ll expect JSON in this format
