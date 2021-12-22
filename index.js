@@ -153,9 +153,16 @@ let users = [
 ];
 
 app.get ('/', )
-// 1.Return a list of ALL movies to the user
+// 1. Get all movies
 app.get('/movies', (req, res) => {
-  res.status(200).json(movies);
+  Users.find()
+    .then((movies) => {
+      res.status(201).json(movies);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 // 2.Return data about a single movie by title to the user
 app.get('/movies/:title', (req, res) => {
