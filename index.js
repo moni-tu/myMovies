@@ -268,8 +268,19 @@ app.delete('/users/:Username/movies/:MovieID', (req, res) => {
   });
 });
 // 9.Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
-app.delete('/users/:username', (req, res) => {
-  res.send('User email has been removed.');
+app.delete('/users/:Username', (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.Username })
+    .then((user) => {
+      if (!user) {
+        res.status(400).send(req.params.Username + ' was not found');
+      } else {
+        res.status(200).send(req.params.Username + ' was deleted.');
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 app.listen(8080, () => {
