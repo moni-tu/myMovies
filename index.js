@@ -10,6 +10,12 @@ Hello Monica, you are expected to create this endpoints.
 8.Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
 9.Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
 */
+
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
+const Movies = Models.Movie;
+const Users = Models.User;
 const express = require('express');  
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
