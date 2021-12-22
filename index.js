@@ -177,7 +177,7 @@ app.get('/movies/director/:name', (req, res) => {
   }))
 })
 
-//6. Add a user
+//5. Add a user
 /* We’ll expect JSON in this format
 {
   ID: Integer,
@@ -209,6 +209,18 @@ app.post('/users', (req, res) => {
     .catch((error) => {
       console.error(error);
       res.status(500).send('Error: ' + error);
+    });
+});
+
+// 6. Get all users
+app.get('/users', (req, res) => {
+  Users.find()
+    .then((users) => {
+      res.status(201).json(users);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
     });
 });
 
