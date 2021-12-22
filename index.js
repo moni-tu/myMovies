@@ -154,9 +154,9 @@ app.get('/movies/:title', (req, res) => {
 });
 // 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
 app.get('/movies/genre/:genre', (req, res) => {
-  res.status(200).json(movies.find((movie) => {
-    return movie.genre === req.params.genre
-  }));
+  const foundGenre = movies.find((movie) => movie.genre === req.params.genre)
+  res.status(200).json(foundGenre)
+  
 });
 
 // 4.Return data about a director (bio, birth year, death year) by name
