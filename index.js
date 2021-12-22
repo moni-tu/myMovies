@@ -253,8 +253,19 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
 });
 
 // 8.Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-app.delete('/users/:favourites/:name', (req, res) => {
-  res.send('Movie has been removed.');
+app.delete('/users/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+     $pull: { FavoriteMovies: req.params.MovieID }
+   },
+   { new: true }, // This line makes sure that the updated document is returned
+  (err, updatedUser) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 // 9.Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
 app.delete('/users/:username', (req, res) => {
