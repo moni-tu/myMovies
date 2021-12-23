@@ -119,8 +119,20 @@ app.post('/users', (req, res) => {
 // 6. Get a user by username
 app.get('/users/:username', (req, res) => {
   Users.findOne({ username: req.params.username })
-    .then((user) => {
-      res.json(user);
+    .then((username) => {
+      res.json(username);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
+// 7. Get all users
+app.get('/users', (req, res) => {
+  Users.find({ users: req.params.users })
+    .then((Users) => {
+      res.json(users);
     })
     .catch((err) => {
       console.error(err);
