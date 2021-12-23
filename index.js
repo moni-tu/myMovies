@@ -30,6 +30,7 @@ mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useU
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
+let auth = require('./auth')(app);
 
 // default text response when at /
 app.get ('/', (req, res) => {
