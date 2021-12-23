@@ -36,7 +36,7 @@ app.get ('/', (req, res) => {
   res.send('Welcome to myMovies!');
 });
 // 1. Get all movies
-app.get('/movies', (req, res) => {
+app.get('/myMovies', (req, res) => {
   myMovies.find()
     .then((myMovies) => {
       res.status(201).json(myMovies);
