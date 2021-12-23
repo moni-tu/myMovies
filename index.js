@@ -47,7 +47,7 @@ app.get('/myMovies', (req, res) => {
     });
 });
 // 2.Return data about a single movie by title to the user
-app.get('/movies/:title', (req, res) => {
+app.get('/myMovies/:title', (req, res) => {
   myMovies.findOne({ title: req.params.title })
     .then((movie) => {
       res.json(movie);
@@ -58,7 +58,7 @@ app.get('/movies/:title', (req, res) => {
     });
 });
 // 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
-app.get('/genre/:name', (req, res) => {
+app.get('/genres/:genre', (req, res) => {
   Genres.findOne({ name: req.params.name })
     .then((genre) => {
       res.json(genre);
@@ -91,10 +91,10 @@ app.get('/director/:name', (req, res) => {
   Birthday: Date
 }*/
 app.post('/users', (req, res) => {
-  Users.findOne({ Username: req.body.Username })
+  Users.findOne({ username: req.body.username })
     .then((user) => {
       if (user) {
-        return res.status(400).send(req.body.Username + 'already exists');
+        return res.status(400).send(req.body.username + 'already exists');
       } else {
         Users
           .create({
@@ -117,8 +117,8 @@ app.post('/users', (req, res) => {
 });
 
 // 6. Get a user by username
-app.get('/users/:Username', (req, res) => {
-  Users.findOne({ Username: req.params.Username })
+app.get('/users/:username', (req, res) => {
+  Users.findOne({ username: req.params.username })
     .then((user) => {
       res.json(user);
     })
@@ -129,8 +129,8 @@ app.get('/users/:Username', (req, res) => {
 });
 
 // 7. Add a movie to a user's list of favorites
-app.post('/users/:Username/movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username }, {
+app.post('/users/:username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.username }, {
      $push: { FavoriteMovies: req.params.MovieID }
    },
    { new: true }, // This line makes sure that the updated document is returned
