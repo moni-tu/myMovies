@@ -20,7 +20,7 @@ const app = express();
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 
-const Movies = Models.Movie;
+const myMovies = Models.Movie;
 const Users = Models.User;
 const Genres = Models.Genre;
 const Directors = Models.Director;
@@ -37,9 +37,9 @@ app.get ('/', (req, res) => {
 });
 // 1. Get all movies
 app.get('/movies', (req, res) => {
-  Movies.find()
-    .then((movies) => {
-      res.status(201).json(movies);
+  myMovies.find()
+    .then((myMovies) => {
+      res.status(201).json(myMovies);
     })
     .catch((err) => {
       console.error(err);
@@ -48,7 +48,7 @@ app.get('/movies', (req, res) => {
 });
 // 2.Return data about a single movie by title to the user
 app.get('/movies/:title', (req, res) => {
-  Movies.findOne({ title: req.params.title })
+  myMovies.findOne({ title: req.params.title })
     .then((movie) => {
       res.json(movie);
     })
