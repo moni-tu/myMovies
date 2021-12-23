@@ -131,7 +131,7 @@ app.get('/users/:username', (req, res) => {
 // 7. Get all users
 app.get('/users', (req, res) => {
   Users.find({ users: req.params.users })
-    .then((Users) => {
+    .then((users) => {
       res.json(users);
     })
     .catch((err) => {
@@ -141,8 +141,8 @@ app.get('/users', (req, res) => {
 });
 
 // 7. Add a movie to a user's list of favorites
-app.post('/users/:username/movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.username }, {
+app.post('/users/:username/favorites/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ username: req.params.username }, {
      $push: { FavoriteMovies: req.params.MovieID }
    },
    { new: true }, // This line makes sure that the updated document is returned
@@ -157,8 +157,8 @@ app.post('/users/:username/movies/:MovieID', (req, res) => {
 });
 
 // 8.Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-app.delete('/users/:Username/movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username }, {
+app.delete('/users/:username/favorites/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.username }, {
      $pull: { FavoriteMovies: req.params.MovieID }
    },
    { new: true }, // This line makes sure that the updated document is returned
@@ -172,13 +172,13 @@ app.delete('/users/:Username/movies/:MovieID', (req, res) => {
   });
 });
 // 9.Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
-app.delete('/users/:Username', (req, res) => {
-  Users.findOneAndRemove({ Username: req.params.Username })
+app.delete('/users/:username', (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.username })
     .then((user) => {
       if (!user) {
-        res.status(400).send(req.params.Username + ' was not found');
+        res.status(400).send(req.params.username + ' was not found');
       } else {
-        res.status(200).send(req.params.Username + ' was deleted.');
+        res.status(200).send(req.params.username + ' was deleted.');
       }
     })
     .catch((err) => {
