@@ -1,5 +1,4 @@
 /*
-Hello Monica, you are expected to create this endpoints.
 1.Return a list of ALL movies to the user
 2.Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
@@ -104,7 +103,7 @@ app.post(
     check("Password", "Password is required").not().isEmpty(),
     check("Email", "Email does not appear to be valid").isEmail(),
   ],
-(req, res) => {
+  (req, res) => {
   // check the validation object for errors
   let errors = validationResult(req);
 
@@ -180,7 +179,7 @@ app.put(
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-
+  });
 // 7. Add a movie to a user's list of favorites
 app.post('/users/:username/favorites/:MovieID', passport.authenticate("jwt", { session: false }), (req, res) => {
   Users.findOneAndUpdate({ username: req.params.username }, {
@@ -229,5 +228,5 @@ app.delete('/deregistrate/:username', passport.authenticate("jwt", { session: fa
 });
 
 app.listen(8080, () => {
-  console.log('Your app is listening on port 8080');
+  console.log("Your app is listening on port 8080.");
 });
