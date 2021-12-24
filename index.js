@@ -120,7 +120,7 @@ app.post('/users', (req, res) => {
 });
 
 // 6. Get a user by username
-app.get('/users/:username', (req, res) => {
+app.get('/users/:username', passport.authenticate("jwt", { session: false }), (req, res) => {
   Users.findOne({ username: req.params.username })
     .then((username) => {
       res.json(username);
@@ -132,7 +132,7 @@ app.get('/users/:username', (req, res) => {
 });
 
 // 7. Get all users
-app.get('/users', (req, res) => {
+app.get('/users', passport.authenticate("jwt", { session: false }), (req, res) => {
   Users.find({ users: req.params.users })
     .then((users) => {
       res.json(users);
@@ -144,7 +144,7 @@ app.get('/users', (req, res) => {
 });
 
 // 7. Add a movie to a user's list of favorites
-app.post('/users/:username/favorites/:MovieID', (req, res) => {
+app.post('/users/:username/favorites/:MovieID', passport.authenticate("jwt", { session: false }), (req, res) => {
   Users.findOneAndUpdate({ username: req.params.username }, {
      $push: { FavoriteMovies: req.params.MovieID }
    },
@@ -160,7 +160,7 @@ app.post('/users/:username/favorites/:MovieID', (req, res) => {
 });
 
 // 8.Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-app.delete('/users/:username/favorites/:MovieID', (req, res) => {
+app.delete('/users/:username/favorites/:MovieID', passport.authenticate("jwt", { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.username }, {
      $pull: { FavoriteMovies: req.params.MovieID }
    },
@@ -175,7 +175,7 @@ app.delete('/users/:username/favorites/:MovieID', (req, res) => {
   });
 });
 // 9.Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
-app.delete('/users/:username', (req, res) => {
+app.delete('/deregistrate/:username', passport.authenticate("jwt", { session: false }), (req, res) => {
   Users.findOneAndRemove({ Username: req.params.username })
     .then((user) => {
       if (!user) {
