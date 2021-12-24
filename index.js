@@ -94,7 +94,7 @@ app.get('/director/:name', passport.authenticate("jwt", { session: false }), (re
 }*/
 app.post(
   '/registration', 
-  [
+  /*[
     check("Username", "Username is required").isLength({ min: 5 }),
     check(
       "Username",
@@ -102,7 +102,7 @@ app.post(
     ).isAlphanumeric(),
     check("Password", "Password is required").not().isEmpty(),
     check("Email", "Email does not appear to be valid").isEmail(),
-  ],
+  ],*/
   (req, res) => {
   // check the validation object for errors
   let errors = validationResult(req);
