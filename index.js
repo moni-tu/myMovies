@@ -39,7 +39,7 @@ app.get ('/', (req, res) => {
   res.send('Welcome to myMovies!');
 });
 // 1. Get all movies
-app.get('/myMovies', (req, res) => {
+app.get('/myMovies', passport.authenticate("jwt", { session: false }), (req, res) => {
   myMovies.find()
     .then((myMovies) => {
       res.status(201).json(myMovies);
@@ -50,7 +50,7 @@ app.get('/myMovies', (req, res) => {
     });
 });
 // 2.Return data about a single movie by title to the user
-app.get('/myMovies/:title', (req, res) => {
+app.get('/myMovies/:title', passport.authenticate("jwt", { session: false }), (req, res) => {
   myMovies.findOne({ title: req.params.title })
     .then((movie) => {
       res.json(movie);
@@ -61,7 +61,7 @@ app.get('/myMovies/:title', (req, res) => {
     });
 });
 // 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
-app.get('/genres/:genre', (req, res) => {
+app.get('/genres/:genre', passport.authenticate("jwt", { session: false }), (req, res) => {
   Genres.findOne({ name: req.params.name })
     .then((genre) => {
       res.json(genre);
@@ -73,7 +73,7 @@ app.get('/genres/:genre', (req, res) => {
 });
 
 // 4.Return data about a director (bio, birth year, death year) by name
-app.get('/director/:name', (req, res) => {
+app.get('/director/:name', passport.authenticate("jwt", { session: false }), (req, res) => {
   Directors.findOne({ name: req.params.name })
     .then((director) => {
       res.json(director);
