@@ -26,7 +26,7 @@ let userSchema = mongoose.Schema({
 });
 
 // this creates collections called db.movies and db.users (plurals and lower case)
-let Movie = mongoose.model('Movie', movieSchema);
+let Movie = mongoose.model('myMovie', movieSchema);
 let User = mongoose.model('User', userSchema);
 
 // need to be imported into index.js
