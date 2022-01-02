@@ -49,7 +49,7 @@ app.get('/mymovies', (req, res) => {
     });
 });
 // 2.Return data about a single movie by title to the user
-app.get('/mymovies/:Title', passport.authenticate("jwt", { session: false }), (req, res) => {
+app.get('/mymovies/:Title', (req, res) => {
   myMovies.findOne({ Title: req.params.Title })
     .then((movie) => {
       res.json(movie);
@@ -60,8 +60,8 @@ app.get('/mymovies/:Title', passport.authenticate("jwt", { session: false }), (r
     });
 });
 // 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
-app.get('/genres/:genre', passport.authenticate("jwt", { session: false }), (req, res) => {
-  Genres.findOne({ name: req.params.name })
+app.get('mymovies/Genre/:Name', passport.authenticate("jwt", { session: false }), (req, res) => {
+  mymovies.findOne({ 'Genre.Name': req.params.Name })
     .then((genre) => {
       res.json(genre);
     })
