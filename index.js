@@ -188,9 +188,9 @@ app.post('/users/:Username/Favorites/:ObjectId', (req, res) => {
   });
 });
 // 8.Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-app.delete('/users/:Username/Favorites/:MovieID', (req, res) => {
+app.delete('/users/:Username/Favorites/:ObjectId', (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
-     $pull: { Favorites: req.params.MovieID }
+     $pull: { Favorites: req.params.ObjectId }
    },
    { new: true }, // This line makes sure that the updated document is returned
   (err, updatedUser) => {
@@ -203,13 +203,13 @@ app.delete('/users/:Username/Favorites/:MovieID', (req, res) => {
   });
 });
 // 9. Delete user by username
-app.delete('/users/:username', (req, res) => {
-  Users.findOneAndRemove({ Username: req.params.username })
+app.delete('/users/:Username', (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.Username })
     .then((user) => {
       if (!user) {
-        res.status(400).send(req.params.username + ' was not found');
+        res.status(400).send(req.params.Username + ' was not found');
       } else {
-        res.status(200).send(req.params.username + ' was deleted.');
+        res.status(200).send(req.params.Username + ' was deleted.');
       }
     })
     .catch((err) => {
