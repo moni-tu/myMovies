@@ -60,8 +60,8 @@ app.get('/mymovies/:Title', (req, res) => {
     });
 });
 // 3.Return data about a genre (description) by name/title (e.g., “Thriller”)
-app.get('mymovies/Genre/:Name', passport.authenticate("jwt", { session: false }), (req, res) => {
-  mymovies.findOne({ 'Genre.Name': req.params.Name })
+app.get('mymovies/Genre/:Name', (req, res) => {
+  myMovies.findOne({ 'Genre.Name': req.params.Name })
     .then((genre) => {
       res.json(genre);
     })
