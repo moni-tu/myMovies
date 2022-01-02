@@ -46,97 +46,143 @@
                 <tbody> 
                     <tr>
                         <td>Get a list of all Movies</td>
-                        <td>/movies</td>
+                        <td>/mymovies</td>
                         <td>GET</td>
                         <td>None</td>
-                        <td>A JSON object holding data about all the students</td>
+                        <td>A JSON object holding data about all the movies</td>
                     </tr>
                     <tr>
                         <td>Get data about a single movie by name</td>
-                        <td>/movies/:Name</td>
+                        <td>/mymovies/:Title</td>
                         <td>GET</td>
                         <td>None</td>
                         <td>A JSON object holding data about a single movie,
-                            containing an ID, name, genres, director and year of release. Example:
+                            containing an ID, title, description, genre, director, imagepath and year of release. Example:
                             {
-                            id : 1,
-                            title : 'New Girl',
-                            genres : 'Sitcom',
-                            director: 'Elizabeth Meriwether',
-                            releasedYear: 2011,
+                                "Genre": {
+                                    "Name": "Science Fiction",
+                                    "Description": "Science fiction is a genre of speculative fiction that typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life."
+                                },
+                                "Director": {
+                                    "Name": "Christopher Nolan",
+                                    "Bio": "British-American film director, producer, and screenwriter. His films have grossed more than US$5 billion worldwide, and have garnered 11 Academy Awards from 36 nominations",
+                                    "Birth": "1970"
+                                },
+                                "Actors": [],
+                                "_id": "61d1c3010521929a358f4c7c",
+                                "Title": "Inception",
+                                "Description": "The film stars Leonardo DiCaprio as a professional thief who steals information by infiltrating the subconscious of his targets. He is offered a chance to have his criminal history erased as payment for the implantation of another person's idea into a target's subconscious. ",
+                                "ImagePath": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_UX67_CR0,0,67,98_AL_.jpg",
+                                "Featured": true
                             }
                             </td>
                     </tr>
                     <tr>
                         <td>Return data about genre by name/title</td>
-                        <td>movies/genre/:genre</td>
+                        <td>mymovies/genre/:genre</td>
                         <td>GET</td>
                         <td>None</td>
                         <td>
-                            A JSON object holding data about the genre of the movie:
+                            A JSON object holding data about the genre, together with info on a movie of the given genre:
                             {
-                            title : 'The Matrix',
-                            genres : {'Action', 'Science Fiction'}
-                            director: 'The Wachowskis',
-                            releasedYear: 1999
+                                "Genre": {
+                                    "Name": "Thriller",
+                                    "Description": "Thrillers are characterized and defined by the moods they elicit, giving viewers heightened feelings of suspense, excitement, surprise, anticipation and anxiety."
+                                },
+                                "Director": {
+                                    "Name": "Christopher Nolan",
+                                    "Bio": "British-American film director, producer, and screenwriter. His films have grossed more than US$5 billion worldwide, and have garnered 11 Academy Awards from 36 nominations",
+                                    "Birth": "1970"
+                                },
+                                "Actors": [],
+                                "_id": "61d1c2e60521929a358f4c7b",
+                                "Title": "Joker",
+                                "description": "The film, based on DC Comics characters, stars Joaquin Phoenix as the Joker and provides a possible origin story for the character. Set in 1981, it follows Arthur Fleck, a failed clown and stand-up comedian whose descent into insanity and nihilism inspires a violent counter-cultural revolution against the wealthy in a decaying Gotham City. ",
+                                "imagePath": "https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_UX67_CR0,0,67,98_AL_.jpg",
+                                "featured": true
                             }
                         </td>
                     </tr>
                     <tr>
-                        <td>Return data about a director (bio, birth year, death year) by name</td>
+                        <td>Return data about a director (bio, birth year, death year) by name, together with info about one of his movies</td>
                         <td>movies/director/:Name</td>
                         <td>GET</td>
                         <td>None</td>
                         <td>A JSON object holding data about the genre of the movie:
-                            director: {
-                                Name:'Raphael Bob-Waksberg',
-                                Bio: 'American comedian, writer, producer, actor, and voice actor. He is known as the creator and showrunner of the Netflix animated comedy series BoJack Horseman and the Amazon Prime Video animated series Undone. ',
-                                Birth: 1984,
-                                Death: 'still alive',
-                              },
+                            "Director": {
+                                "Name": "Christopher Nolan",
+                                "Bio": "British-American film director, producer, and screenwriter. His films have grossed more than US$5 billion worldwide, and have garnered 11 Academy Awards from 36 nominations",
+                                "Birth": "1970"
+                            },
                         </td>
                     </tr>
                     <tr>
                         <td>Allow new user to register</td>
-                        <td>/users/:newUser</td>
+                        <td>/users/</td>
                         <td>POST</td>
-                        <td>None</td>
+                        <td>A JSON object holding data about the new user:
+                            {
+                                "Username": "Silviatest",
+                                "Password": "Silviapsw",
+                                "Email": "Silvia@gmail.com",
+                                "Birthday": "1988-01-04"
+                            }
+                        </td>
                         <td>A text message indicating whether the user was successfully registrated</td>
                     </tr>
                     <tr>
                         <td>Allow users to update their user information</td>
-                        <td>/users/:username</td>
+                        <td>/users/:Username</td>
                         <td>PUT</td>
-                        <td>None</td>
-                        <td>A text message indicating whether the user info was successfully updated</td>
+                        <td>A JSON object holding data that needs to be updated (password change from 4032):
+                            {
+                                "Username": "laura-mo",
+                                "Password": "4000",
+                                "Email": "laura@gmail.com",
+                                "Birthday": "1987-02-12"
+                            }
+                        </td>
+                        <td>A JSON object mirroring the data change:
+                            {
+                                "Username": "laura-mo",
+                                "Password": "4000",
+                                "Email": "laura@gmail.com",
+                                "Birthday": "1987-02-12"
+                            }
+                        </td>
                     </tr>
                     <tr>
                         <td>Add new movie to list of favorite</td>
-                        <td>users/:favourites/:movieName</td>
+                        <td>/users/:Username/Favorites/:ObjectId</td>
                         <td>POST</td>
                         <td>None</td>
-                        <td>A text message indicating whether the movie list was successfully updated</td>
+                        <td>A JSON object holding the updated data:
+                            {
+                                "_id": "61d2073598c97dbe0b1d0abe",
+                                "Name": "Monica",
+                                "Username": "moni-tu",
+                                "Password": "2020",
+                                "Email": "moni.tu@gmail.com",
+                                "Birthday": "1994-05-03T00:00:00.000Z",
+                                "Favorites": [
+                                    "61d1bd710f1b9b447e47b24d"
+                                ]
+                            }
+                        </td>
                     </tr>
                     <tr>
                         <td>Delete movie from list of favourites </td>
-                        <td>users/:favourites/:movieName</td>
-                        <td>Delete</td>
+                        <td>/users/:Username/Favorites/:ObjectId</td>
+                        <td>DELETE</td>
                         <td>None</td>
-                        <td>A text message indicating whether the movie was successfully deleted from the list of favourites</td>
+                        <td>A JSON object holding the updated data</td>
                     </tr>
                     <tr>
                         <td>Delete the user</td>
-                        <td>/users/:deleteUser</td>
+                        <td>/users/:Username</td>
                         <td>DELETE</td>
                         <td>None</td>
                         <td>A text message indicating whether the user info was successfully deleted</td>
-                    </tr>
-                    <tr>
-                        <td>Allow users to update their user information</td>
-                        <td>/users/:username</td>
-                        <td>PUT</td>
-                        <td>None</td>
-                        <td>A text message indicating whether the user info was successfully updated</td>
                     </tr>
                 </tbody>
             </table>
