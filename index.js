@@ -166,12 +166,23 @@ app.put(
     check("Email", "Email does not appear to be valid").isEmail(),
   ],*/
   (req, res) => {
-    // check the validation object for errors
-    let errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-    }
+    Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
+      {
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        birthday: req.body.birthday
+      }
+    },
+    { new: true }, // This line makes sure that the updated document is returned
+    (err, updatedUser) => {
+      if(err) {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      } else {
+        res.json(updatedUser);
+      }
+    });
   });
 // 7. Add a movie to a user's list of favorites
 app.post('/users/:username/favorites/:MovieID', passport.authenticate("jwt", { session: false }), (req, res) => {
