@@ -214,8 +214,8 @@ app.delete('/users/:username/favorites/:MovieID', passport.authenticate("jwt", {
     }
   });
 });
-// 9.Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
-app.delete('/deregistrate/:username', passport.authenticate("jwt", { session: false }), (req, res) => {
+// 9. Delete user by username
+app.delete('/users/:username', (req, res) => {
   Users.findOneAndRemove({ Username: req.params.username })
     .then((user) => {
       if (!user) {
