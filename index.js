@@ -93,7 +93,7 @@ app.get('/mymovies/director/:name', (req, res) => {
   Birthday: Date
 }*/
 app.post(
-  '/users', 
+  '/users/', 
   /*[
     check("Username", "Username is required").isLength({ min: 5 }),
     check(
