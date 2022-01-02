@@ -75,7 +75,7 @@ app.get('/mymovies/genre/:name', (req, res) => {
 app.get('/mymovies/director/:name', (req, res) => {
   myMovies.findOne({ 'Director.Name': req.params.name })
     .then((movie) => {
-      res.json(movie.Director.Bio);
+      res.json(movie);
     })
     .catch((err) => {
       console.error(err);
@@ -141,7 +141,7 @@ app.get('/users', (req, res) => {
     });
 });
 
-// 6. Allow users to update their user information
+// 6. Update a user's info, by username
 app.put(
   "/users/:Username",
   /*[
@@ -156,12 +156,10 @@ app.put(
   (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
       {
-        Name: req.body.Name,
         Username: req.body.Username,
         Password: req.body.Password,
         Email: req.body.Email,
-        Birthday: req.body.Birthday,
-        Favorites: req.body.Favorites
+        Birthday: req.body.Birthday
       }
     },
     { new: true }, // This line makes sure that the updated document is returned
