@@ -111,12 +111,10 @@ app.post(
       } else {
         Users
           .create({
-            Name: req.body.Name,
             Username: req.body.Username,
             Password: req.body.Password,
             Email: req.body.Email,
             Birthday: req.body.Birthday,
-            Favorites: req.body.Favorites
           })
           .then((user) =>{res.status(201).json(user) })
         .catch((error) => {
