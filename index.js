@@ -200,9 +200,9 @@ app.post('/users/:username/favorites/:MovieID', (req, res) => {
   });
 });
 // 8.Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-app.delete('/users/:username/favorites/:MovieID', passport.authenticate("jwt", { session: false }), (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.username }, {
-     $pull: { FavoriteMovies: req.params.MovieID }
+app.delete('/users/:username/favorites/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ username: req.params.username }, {
+     $pull: { favorites: req.params.MovieID }
    },
    { new: true }, // This line makes sure that the updated document is returned
   (err, updatedUser) => {
