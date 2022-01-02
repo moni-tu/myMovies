@@ -38,7 +38,7 @@ app.get ('/', (req, res) => {
   res.send('Welcome to myMovies!');
 });
 // 1. Get all movies
-app.get('/myMovies', (req, res) => {
+app.get('/mymovies', (req, res) => {
   myMovies.find()
     .then((myMovies) => {
       res.status(201).json(myMovies);
@@ -49,8 +49,8 @@ app.get('/myMovies', (req, res) => {
     });
 });
 // 2.Return data about a single movie by title to the user
-app.get('/myMovies/:title', passport.authenticate("jwt", { session: false }), (req, res) => {
-  myMovies.findOne({ title: req.params.title })
+app.get('/mymovies/:Title', passport.authenticate("jwt", { session: false }), (req, res) => {
+  myMovies.findOne({ Title: req.params.Title })
     .then((movie) => {
       res.json(movie);
     })
