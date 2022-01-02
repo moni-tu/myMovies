@@ -111,10 +111,12 @@ app.post(
       } else {
         Users
           .create({
-            username: req.body.username,
-            password: req.body.password,
-            email: req.body.email,
-            birthday: req.body.birthday
+            Name: req.body.Name,
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday,
+            Favorites: req.body.Favorites
           })
           .then((user) =>{res.status(201).json(user) })
         .catch((error) => {
@@ -143,7 +145,7 @@ app.get('/users', (req, res) => {
 
 // 6. Allow users to update their user information
 app.put(
-  "/users/:username",
+  "/users/:Username",
   /*[
     check("Username", "Username is required").isLength({ min: 5 }),
     check(
@@ -154,12 +156,14 @@ app.put(
     check("Email", "Email does not appear to be valid").isEmail(),
   ],*/
   (req, res) => {
-    Users.findOneAndUpdate({ username: req.params.username }, { $set:
+    Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
       {
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-        birthday: req.body.birthday
+        Name: req.body.Name,
+        Username: req.body.Username,
+        Password: req.body.Password,
+        Email: req.body.Email,
+        Birthday: req.body.Birthday,
+        Favorites: req.body.Favorites
       }
     },
     { new: true }, // This line makes sure that the updated document is returned
