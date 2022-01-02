@@ -185,9 +185,9 @@ app.put(
     });
   });
 // 7. Add a movie to a user's list of favorites
-app.post('/users/:username/favorites/:MovieID', passport.authenticate("jwt", { session: false }), (req, res) => {
+app.post('/users/:username/favorites/:MovieID', (req, res) => {
   Users.findOneAndUpdate({ username: req.params.username }, {
-     $push: { FavoriteMovies: req.params.MovieID }
+     $push: { favorites: req.params.MovieID }
    },
    { new: true }, // This line makes sure that the updated document is returned
   (err, updatedUser) => {
