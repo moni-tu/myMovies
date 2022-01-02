@@ -173,9 +173,9 @@ app.put(
     });
   });
 // 7. Add a movie to a user's list of favorites
-app.post('/users/:username/favorites/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ username: req.params.username }, {
-     $push: { favorites: req.params.MovieID }
+app.post('/users/:Username/Favorites/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+     $push: { Favorites: req.params.MovieID }
    },
    { new: true }, // This line makes sure that the updated document is returned
   (err, updatedUser) => {
@@ -188,9 +188,9 @@ app.post('/users/:username/favorites/:MovieID', (req, res) => {
   });
 });
 // 8.Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-app.delete('/users/:username/favorites/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ username: req.params.username }, {
-     $pull: { favorites: req.params.MovieID }
+app.delete('/users/:Username/Favorites/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+     $pull: { Favorites: req.params.MovieID }
    },
    { new: true }, // This line makes sure that the updated document is returned
   (err, updatedUser) => {
