@@ -93,7 +93,7 @@ app.get('/mymovies/director/:name', (req, res) => {
   Birthday: Date
 }*/
 app.post(
-  '/registration', 
+  '/users', 
   /*[
     check("Username", "Username is required").isLength({ min: 5 }),
     check(
@@ -104,13 +104,6 @@ app.post(
     check("Email", "Email does not appear to be valid").isEmail(),
   ],*/
   (req, res) => {
-  // check the validation object for errors
-  let errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
-  }
-  let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ username: req.body.username })
     .then((user) => {
       if (user) {
@@ -118,10 +111,10 @@ app.post(
       } else {
         Users
           .create({
-            Username: req.body.Username,
-            Password: req.body.Password,
-            Email: req.body.Email,
-            Birthday: req.body.Birthday
+            username: req.body.username,
+            password: req.body.password,
+            email: req.body.email,
+            birthday: req.body.birthday
           })
           .then((user) =>{res.status(201).json(user) })
         .catch((error) => {
@@ -149,7 +142,7 @@ app.get('/users/:username', (req, res) => {
 });
 
 // Get all users
-app.get('/users', passport.authenticate("jwt", { session: false }), (req, res) => {
+app.get('/users', (req, res) => {
   Users.find({ users: req.params.users })
     .then((users) => {
       res.json(users);
@@ -163,7 +156,6 @@ app.get('/users', passport.authenticate("jwt", { session: false }), (req, res) =
 // 6. Allow users to update their user information
 app.put(
   "/users/:username",
-  passport.authenticate("jwt", { session: false }),
   /*[
     check("Username", "Username is required").isLength({ min: 5 }),
     check(
