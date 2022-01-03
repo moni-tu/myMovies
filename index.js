@@ -29,6 +29,10 @@ mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useU
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
+
+const cors = require('cors');
+app.use(cors());
+
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
