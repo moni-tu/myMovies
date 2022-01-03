@@ -118,6 +118,7 @@ app.post(
     check("Email", "Email does not appear to be valid").isEmail(),
   ],*/
   (req, res) => {
+  let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -126,7 +127,7 @@ app.post(
         Users
           .create({
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday,
           })
