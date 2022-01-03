@@ -93,7 +93,7 @@ app.get('/mymovies/director/:name', passport.authenticate('jwt', { session: fals
   Birthday: Date
 }*/
 app.post(
-  '/users/', passport.authenticate('jwt', { session: false }),
+  '/users/',
   /*[
     check("Username", "Username is required").isLength({ min: 5 }),
     check(
