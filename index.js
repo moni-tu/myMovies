@@ -108,7 +108,7 @@ app.get('/mymovies/director/:name', passport.authenticate('jwt', { session: fals
 }*/
 app.post(
   '/users/',
-  /*[
+  [
     check("Username", "Username is required").isLength({ min: 5 }),
     check(
       "Username",
@@ -116,8 +116,13 @@ app.post(
     ).isAlphanumeric(),
     check("Password", "Password is required").not().isEmpty(),
     check("Email", "Email does not appear to be valid").isEmail(),
-  ],*/
+  ],
   (req, res) => {
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
   let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
