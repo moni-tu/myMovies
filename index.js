@@ -24,7 +24,8 @@ const myMovies = Models.Movie;
 const Users = Models.User;
 
 // connect to MongoDB Database called test
-mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://moni-tu:FreiburgUni8@cluster0.znumf.mongodb.net/myMoviesDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 app.use(morgan('common'));
