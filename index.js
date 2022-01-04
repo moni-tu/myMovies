@@ -15,12 +15,14 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 // const uuid = require('uuid');
 
 
 // Declare Exportet Mongoose Models
 const myMovies = Models.Movie;
 const Users = Models.User;
+
 // connect to MongoDB Database called test
 mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -29,7 +31,6 @@ app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-const cors = require('cors');
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 app.use(cors({
   origin: (origin, callback) => {
@@ -48,9 +49,6 @@ require('./passport');
 app.use(passport.initialize());
 
 const { check, validationResult } = require('express-validator');
-
-app.use(cors());
-
 
 // default text response when at /
 app.get ('/', (req, res) => {
