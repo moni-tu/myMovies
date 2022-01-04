@@ -12,20 +12,19 @@
 
 const express = require('express');  
 const morgan = require('morgan');
-const bodyParser = require('body-parser');
-const uuid = require('uuid');
-const app = express();
-
 const mongoose = require('mongoose');
 const Models = require('./models.js');
+const bodyParser = require('body-parser');
+// const uuid = require('uuid');
 
+
+// Declare Exportet Mongoose Models
 const myMovies = Models.Movie;
 const Users = Models.User;
-const Genres = Models.Genre;
-const Directors = Models.Director;
-
+// connect to MongoDB Database called test
 mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true });
 
+const app = express();
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -46,6 +45,12 @@ app.use(cors({
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
+app.use(passport.initialize());
+
+const { check, validationResult } = require('express-validator');
+
+app.use(cors());
+
 
 // default text response when at /
 app.get ('/', (req, res) => {
@@ -109,13 +114,10 @@ app.get('/mymovies/director/:name', passport.authenticate('jwt', { session: fals
 app.post(
   '/users/',
   [
-    check("Username", "Username is required").isLength({ min: 5 }),
-    check(
-      "Username",
-      "Username contains non alphanumeric characters - not allowed."
-    ).isAlphanumeric(),
-    check("Password", "Password is required").not().isEmpty(),
-    check("Email", "Email does not appear to be valid").isEmail(),
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()
   ],
   (req, res) => {
     // check validation object for errors
