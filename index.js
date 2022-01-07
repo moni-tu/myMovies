@@ -17,15 +17,17 @@ const Models = require('./models.js');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 // const uuid = require('uuid');
-
+const path = require('path');
+require('dotenv').config({path: path.join(__dirname, '.env')});
 
 // Declare Exportet Mongoose Models
 const myMovies = Models.Movie;
 const Users = Models.User;
+let mongouri = process.env.MONGO_URI;
 
 // connect to MongoDB Database called test
 // mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect('', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongouri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 app.use(morgan('common'));
