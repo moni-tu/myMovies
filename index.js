@@ -58,7 +58,9 @@ app.get ('/', (req, res) => {
   res.send('Welcome to myMovies!');
 });
 // 1. Get all movies
-app.get('/mymovies', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/mymovies', 
+//passport.authenticate('jwt', { session: false }), 
+(req, res) => {
   myMovies.find()
     .then((myMovies) => {
       res.status(201).json(myMovies);
