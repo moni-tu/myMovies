@@ -1,0 +1,4 @@
+{"_id":{"$oid":"61bb84d9dfae3588696406be"},"name":"Monica","username":"moni-tu","password":"2020","email":"moni.tu@gmail.com","birthday":"1994-05-03"}
+{"_id":{"$oid":"61bb8aafdfae3588696406c0"},"name":"Clara","username":" laura-mo","password":"4032","email":"laura.mo@gmail.com","birthday":"1987-02-12","favorites":[]}
+{"_id":{"$oid":"61bb8ae6dfae3588696406c1"},"name":"Andrea","username":" andreaeae","password":"1234","email":"andre.ae@gmail.com","birthday":"1887-12-12","favorites":[]}
+{"_id":{"$oid":"61bb8b10dfae3588696406c2"},"name":"Lucas","username":"lucas23","password":"5678","email":"lucas.js@gmail.com","birthday":"2001-03-20","favorites":[{"$oid":"61bb6d6ba44be643f5fb515d"}]}
