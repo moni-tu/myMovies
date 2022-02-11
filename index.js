@@ -156,10 +156,10 @@ app.post(
 });
 
 // Get all users
-app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/users/${Username}', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.find({ users: req.params.users })
-    .then((users) => {
-      res.json(users);
+    .then((user) => {
+      res.json(user);
     })
     .catch((err) => {
       console.error(err);
