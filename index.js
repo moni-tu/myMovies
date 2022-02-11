@@ -155,9 +155,9 @@ app.post(
     });
 });
 
-// Get all users
-app.get('/users/${Username}', passport.authenticate('jwt', { session: false }), (req, res) => {
-  Users.find({ users: req.params.users })
+// Get a user info
+app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Users.findOne({ Username: req.params.Username })
     .then((user) => {
       res.json(user);
     })
