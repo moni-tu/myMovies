@@ -34,7 +34,7 @@ app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'https://my-awesome-movies.netlify.app/'];
 app.use(cors({
   origin: (origin, callback) => {
     if(!origin) return callback(null, true);
