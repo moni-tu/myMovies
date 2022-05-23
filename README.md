@@ -17,7 +17,8 @@ The easiest way to start is to clone the repository.
 git clone https://github.com/moni-tu/myMovies.git
 ```
 
-USE GOALS
+## USE GOALS
+
 In the myMovies app, the user can view a list of movies and see more details on demand. The user can also create an account with password and save data of favourite movies.
 
 ### KEY FEATURES
