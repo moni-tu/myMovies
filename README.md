@@ -50,5 +50,4 @@ In the myMovies app, the user can view a list of movies and see more details on 
 - The API includes data validation logic.
 - The API meets data security regulations.
 - The API is deployed to Heroku ### <a href="https://mymovie-backend-api.herokuapp.com/">LIVE DEMO</a>.
-- The app is deployed to GitHub Pages ### <a href="https://github.com/moni-tu/myMovies">LIVE DEMO</a>.
 - The app works in Chrome, Firefox, Safari, Edge, and Internet Explorer 11.
