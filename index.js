@@ -46,7 +46,7 @@ app.use(bodyParser.json());
 
 // 5.07.22 update the address of mymovies react changed to the same but with numbers on front 'https://624b0be321937b090192e2e0--my-awesome-movies.netlify.app'. I had CORs error when accessing the app again.
 
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'https://my-awesome-movies.netlify.app', 'https://624b0be321937b090192e2e0--my-awesome-movies.netlify.app', 'http://localhost:4200', 'https://mymovie-backend-api.herokuapp.com/users', 'https://moni-tu.github.io/MyMovies-Angular-client/welcome', 'https://moni-tu.github.io', 'https://www.imdb.com', 'https://www.imdb.com/title'];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'https://my-awesome-movies.netlify.app', 'https://624b0be321937b090192e2e0--my-awesome-movies.netlify.app', 'http://localhost:4200', 'https://mymovie-backend-api.herokuapp.com/users', 'https://moni-tu.github.io/MyMovies-Angular-client/welcome', 'https://moni-tu.github.io', 'https://www.imdb.com', 'https://www.imdb.com/title', 'https://www.imdb.com/title/tt0396269/mediaviewer/rm746526464/?ref_=tt_ov_i'];
 app.use(cors({
   origin: (origin, callback) => {
     if(!origin) return callback(null, true);
